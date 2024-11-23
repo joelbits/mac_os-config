@@ -1,0 +1,41 @@
+#! /usr/bin/env bash
+
+# Label: Install Python
+# Description: Install and setup Python for local development.
+install_python() {
+    local version=""
+    local desired_version="3.12.7"
+
+    if [[ -x "$(command -v rye)" ]]; then
+        version=$(rye toolchain list | grep -Eo 'cpython@[0-9]+\.[0-9]+\.[0-9]+' | cut -d'@' -f2 | sort -u)
+        if [[ -f "$HOME/.python-version" ]]; then
+            desired_version="$(cat $HOME/.python-version | tr -d '\n')"
+        fi
+    fi
+
+    if [[ "$version" == "$desired_version" ]]; then
+        echo "Python $desired_version is already installed."
+        return
+    fi
+
+    # Install the latest Python version.
+    curl -sSf https://rye.astral.sh/get | RYE_INSTALL_OPTION="--yes" bash
+
+    # Remove all other Python versions than the desired one.
+    "$(get_homebrew_bin_root)"/rye toolchain list | grep -Eo 'cpython@[0-9]+\.[0-9]+\.[0-9]+' | while read -r tcversion; do
+      rye toolchain remove "$tcversion"
+    done
+
+    # Set the installed version as the global system Python
+    "$(get_homebrew_bin_root)"/rye toolchain fetch "$version"
+
+    # Add rye env to the shell profile, if those lines are not already present.
+    if ! grep -q 'eval "$(rye env)"' "$HOME/.bash_profile"; then
+        echo 'eval "$(rye env)"' >> "$HOME/.bash_profile"
+    fi
+    if ! grep -q 'eval "$(rye env)"' "$HOME/.zshrc"; then
+        echo 'eval "$(rye env)"' >> "$HOME/.zshrc"
+    fi
+}
+
+install_python

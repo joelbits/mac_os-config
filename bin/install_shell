@@ -2,10 +2,15 @@
 
 # Installs shell.
 
-if [[ -z $(cat /etc/shells | grep "$(get_homebrew_bin_root)/bash") ]]; then
-  sudo bash -c "printf '$(get_homebrew_bin_root)/bash\n' >> /etc/shells"
-  chsh -s "$(get_homebrew_bin_root)/bash"
-  rm -f "$HOME/.bash_profile"
+if [[ -z $(cat /etc/shells | grep "$(get_homebrew_bin_root)/zsh") ]]; then
+  sudo bash -c "printf '$(get_homebrew_bin_root)/zsh\n' >> /etc/shells"
+  chsh -s "$(get_homebrew_bin_root)/zsh"
+  rm -f "$HOME/.zprofile"
+  source "$HOME/.zshrc"
+  if [[ ! -d "$HOME/.oh-my-zsh" ]]; then
+    printf "Installing oh-my-zsh...\n"
+    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
+  fi
 else
-  printf "%s\n" "Shell is installed."
+  printf "%s\n" "ZSH Shell and oh-my-zsh is installed."
 fi

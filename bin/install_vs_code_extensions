@@ -1,0 +1,15 @@
+#! /usr/bin/env bash
+code --install-extension antfu.goto-alias
+code --install-extension bradlc.vscode-tailwindcss
+code --install-extension esbenp.prettier-vscode
+code --install-extension github.copilot
+code --install-extension github.copilot-chat
+code --install-extension humao.rest-client
+code --install-extension k--kato.intellij-idea-keybindings
+code --install-extension nuxt.mdc
+code --install-extension nuxtr.nuxt-vscode-extentions
+code --install-extension nuxtr.nuxtr-vscode
+code --install-extension oven.bun-vscode
+code --install-extension postman.postman-for-vscode
+code --install-extension syler.sass-indented
+code --install-extension vue.volar

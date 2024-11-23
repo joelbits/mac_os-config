@@ -1,99 +1,21 @@
 #! /usr/bin/env bash
-
-# Installs App Store software.
-
-# Acorn
-mas install 1547371478
-
-# Bitwarden
+# BitWarden
 mas install 1352778147
-
-# CCMenu
-mas install 603117688
-
-# DaisyDisk
-mas install 411643860
-
 # Dropover
 mas install 1355679052
-
-# GarageBand
-mas install 682658836
-
 # Hand Mirror
 mas install 1502839586
-
-# iMovie
-mas install 408981434
-
 # Infuse
 mas install 1136220934
-
-# Key Codes
-mas install 414568915
-
-# Keymou
-mas install 449863619
-
-# Keynote
-mas install 409183694
-
-# Kindle
-mas install 302584613
-
-# LimeChat
-mas install 414030210
-
-# Marked 2
-mas install 890031187
-
-# Medis
-mas install 1579200037
-
-# Meeter
-mas install 1510445899
-
-# Metadatics
-mas install 554883654
-
-# MindNode
-mas install 1289197285
-
-# Name Mangler
-mas install 603637384
-
-# Numbers
-mas install 409203825
-
-# OmniFocus 3
-mas install 1346203938
-
-# Pages
-mas install 409201541
-
 # Patterns
 mas install 429449079
-
-# Permute 3
-mas install 1444998321
-
-# Paletter
-mas install 1494948845
-
-# Primitive
-mas install 1175103038
-
-# Sequence Diagram
-mas install 1195426709
-
-# Shapes
-mas install 930093508
-
-# Shush
-mas install 496437906
-
 # Slack
 mas install 803453959
-
+# Trello
+mas install 1278508951
+# Webcam Settings
+mas install 533696630
 # WiFi Explorer
 mas install 494803304
+# Xcode
+mas install 497799835

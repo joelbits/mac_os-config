@@ -1,0 +1,49 @@
+#! /usr/bin/env bash
+
+BREWFILE_ALL="Brewfile"
+
+# Update all Brew packages.
+#brew cu -a -f -y
+
+# Dump installed brew packages to Brewfile.
+# Includes mas, cask, brew packages, and vscode extensions.
+#brew bundle dump -f --file=$BREWFILE_ALL
+
+# Split Brewfile into separate scripts, one for each type of package,
+# then handled by this repo's scripts, or individually as needed.
+
+# Files to split Brewfile into.
+BREWFILE_MAS="install_app_store"
+BREWFILE_CASK="install_homebrew_casks"
+BREWFILE_BREW="install_homebrew_formulas"
+BREWFILE_VSCODE="install_vs_code_extensions"
+
+# clear out old files
+echo "#! /usr/bin/env bash" > $BREWFILE_MAS
+echo "#! /usr/bin/env bash" > $BREWFILE_CASK
+echo "#! /usr/bin/env bash" > $BREWFILE_BREW
+echo "#! /usr/bin/env bash" > $BREWFILE_VSCODE
+
+# mas packages
+awk -F'"|, id: ' '/^mas ".*", id: [0-9]+$/ {print "# " $2 "\nmas install " $4}' $BREWFILE_ALL >> $BREWFILE_MAS
+
+# cask packages
+awk -F'"' '/^cask ".*"/ {print "brew install --cask " $2}' $BREWFILE_ALL >> $BREWFILE_CASK
+
+# brew packages
+awk '/^brew "/ {
+    gsub("\"", ""); 
+    package = $2; 
+    args = ""; 
+    if ($0 ~ /args: \[.*HEAD.*\]/) { 
+        args = "--HEAD";
+    }
+    if ($0 ~ /link: false/) { 
+        args = (args ? args " " : "") "--no-link";
+    }
+    sub(/,.*/, "", package); # Remove trailing commas from package
+    print "brew install " (args ? args " " : "") package;
+}' $BREWFILE_ALL >> $BREWFILE_BREW
+
+# vscode extensions
+awk '/^vscode "/ {gsub("\"", ""); print "code --install-extension " $2}' $BREWFILE_ALL >> $BREWFILE_VSCODE

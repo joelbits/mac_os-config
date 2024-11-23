@@ -2,47 +2,47 @@
 
 # Performs restoration of backups.
 
-read -p "Enter the backup volume path (Example: \"/Volumes/alchemist\")? " mac_os_backup_root
-
-if [[ ! -e "$mac_os_backup_root" ]]; then
-  printf "%s\n" "ERROR: Backup volume cannot be found: $mac_os_backup_root."
-  exit 1
-fi
-
-mkdir -p log
-
-rsync \
-  --rsync-path="sudo rsync" \
-  --perms \
-  --recursive \
-  --compress \
-  --numeric-ids \
-  --links \
-  --hard-links \
-  --files-from="$MAC_OS_CONFIG_PATH/lib/restore.bom" \
-  --log-file="log/restore.log" \
-  --human-readable \
-  --verbose \
-  "$mac_os_backup_root/" /
-
-# Newsyslog
-sudo cp -p "$mac_os_backup_root/etc/newsyslog.d/alchemists.conf" "/etc/newsyslog.d"
-sudo cp -p "$mac_os_backup_root/etc/newsyslog.d/homebrew.conf" "/etc/newsyslog.d"
-
-# Dotfiles
-(
-  cd "$HOME/Engineering/OSS/dotfiles"
-  bin/run l
-)
-
-# Sublime Text
-(
-  cd "$HOME/Engineering/OSS/sublime_text_setup"
-  bin/run l
-)
-
-# Duti
-duti "$HOME/.config/duti/configuration.duti"
+#read -p "Enter the backup volume path (Example: \"/Volumes/alchemist\")? " mac_os_backup_root
+#
+#if [[ ! -e "$mac_os_backup_root" ]]; then
+#  printf "%s\n" "ERROR: Backup volume cannot be found: $mac_os_backup_root."
+#  exit 1
+#fi
+#
+#mkdir -p log
+#
+#rsync \
+#  --rsync-path="sudo rsync" \
+#  --perms \
+#  --recursive \
+#  --compress \
+#  --numeric-ids \
+#  --links \
+#  --hard-links \
+#  --files-from="$MAC_OS_CONFIG_PATH/lib/restore.bom" \
+#  --log-file="log/restore.log" \
+#  --human-readable \
+#  --verbose \
+#  "$mac_os_backup_root/" /
+#
+## Newsyslog
+#sudo cp -p "$mac_os_backup_root/etc/newsyslog.d/alchemists.conf" "/etc/newsyslog.d"
+#sudo cp -p "$mac_os_backup_root/etc/newsyslog.d/homebrew.conf" "/etc/newsyslog.d"
+#
+## Dotfiles
+#(
+#  cd "$HOME/Engineering/OSS/dotfiles"
+#  bin/run l
+#)
+#
+## Sublime Text
+#(
+#  cd "$HOME/Engineering/OSS/sublime_text_setup"
+#  bin/run l
+#)
+#
+## Duti
+#duti "$HOME/.config/duti/configuration.duti"
 
 # Reboot
 printf "%s\n" "Please reboot machine and then finish by installing all libraries."
