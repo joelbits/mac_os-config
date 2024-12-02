@@ -44,5 +44,11 @@
 ## Duti
 #duti "$HOME/.config/duti/configuration.duti"
 
+# backrest / restic backup
+printf "%s\n" "Please put your ~/.config/backrest/config.json file in place!"
+read -s -k '?Press any key to continue, when ready...'
+
+brew services start backrest
+
 # Reboot
 printf "%s\n" "Please reboot machine and then finish by installing all libraries."
