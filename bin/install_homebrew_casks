@@ -64,6 +64,7 @@ brew install --cask openoffice
 brew install --cask pgadmin4
 brew install --cask pika
 brew install --cask protonvpn
+brew install --cask proton-pass
 brew install --cask pop
 brew install --cask postman
 brew install --cask protonmail-bridge
