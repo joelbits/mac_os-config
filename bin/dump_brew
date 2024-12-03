@@ -21,8 +21,11 @@ BREWFILE_VSCODE="install_vs_code_extensions"
 # clear out old files
 echo "#! /usr/bin/env bash" > $BREWFILE_MAS
 echo "#! /usr/bin/env bash" > $BREWFILE_CASK
-echo "#! /usr/bin/env bash" > $BREWFILE_BREW
 echo "#! /usr/bin/env bash" > $BREWFILE_VSCODE
+echo "#! /usr/bin/env bash" > $BREWFILE_BREW
+
+# add required taps to top of $BREWFILE_BREW
+awk '/^tap / {gsub("\"", "", $0); print "brew tap " $2}' $BREWFILE_ALL >> $BREWFILE_BREW
 
 # mas packages
 awk -F'"|, id: ' '/^mas ".*", id: [0-9]+$/ {print "# " $2 "\nmas install " $4}' $BREWFILE_ALL >> $BREWFILE_MAS
@@ -39,7 +42,7 @@ awk '/^brew "/ {
         args = "--HEAD";
     }
     if ($0 ~ /link: false/) { 
-        args = (args ? args " " : "") "--no-link";
+        args = (args ? args " " : "") "--no-binaries";
     }
     sub(/,.*/, "", package); # Remove trailing commas from package
     print "brew install " (args ? args " " : "") package;

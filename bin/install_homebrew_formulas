@@ -1,4 +1,10 @@
 #! /usr/bin/env bash
+brew tap garethgeorge/homebrew-backrest-tap
+brew tap homebrew/bundle
+brew tap homebrew/cask
+brew tap homebrew/cask-fonts
+brew tap homebrew/core
+brew tap homebrew/services
 brew install awscli
 brew install backrest
 brew install bat
@@ -46,6 +52,7 @@ brew install kubectx
 brew install kubeseal
 brew install kustomize
 brew install lnav
+brew install mas
 brew install mas
 brew install mise
 brew install noti
