@@ -1,5 +1,6 @@
 #! /usr/bin/env bash
 brew install awscli
+brew install backrest
 brew install bat
 brew install btop
 brew install gettext
@@ -17,7 +18,6 @@ brew install eza
 brew install expect
 brew install fd
 brew install fish
-brew install fluxctl
 brew install fzf
 brew install gcc
 brew install gdk-pixbuf
@@ -41,13 +41,12 @@ brew install jo
 brew install jq
 brew install k9s
 brew install kcat
-brew install --no-link kubernetes-cli
+brew install --no-binaries kubernetes-cli
 brew install kubectx
 brew install kubeseal
 brew install kustomize
 brew install lnav
 brew install mas
-brew install map
 brew install mise
 brew install noti
 brew install nyancat
@@ -76,9 +75,7 @@ brew install w3m
 brew install wakatime-cli
 brew install watch
 brew install wget
-brew install wrk
 brew install xh
 brew install xsv
 brew install zoxide
 brew install zsh
-brew install --HEAD jabley/wrk2/wrk2
